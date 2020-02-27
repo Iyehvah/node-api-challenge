@@ -88,3 +88,7 @@ typings/
 
 # DynamoDB Local files
 .dynamodb/
+
+
+# ENVIROMENT VARIABLES
+.env
