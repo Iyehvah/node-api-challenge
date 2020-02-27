@@ -1,5 +1,5 @@
 const projectDB = require("../data/helpers/projectModel")
-// const actionDB = require("../data/helpers/actionModel")
+const actionsDB = require("../data/helpers/actionModel")
 
 function validateProjectBody() {
     return( req, res, next) => {
@@ -53,9 +53,27 @@ function validateActionBody(){
     }
 }
 
+function validateActionId() {
+    return( req, res, next) => {
+        actionsDB.get(req.params.id)
+        .then(action => {
+            if(action) {
+                req.action = action
+                next()
+            } else {
+                res.status(404).json({
+                    message: "Action not found"
+                })
+            }
+        })
+        .catch(error => next(error))
+    }
+}
+
 
 module.exports = {
     validateProjectBody,
     validateProjectID,
-    validateActionBody
+    validateActionBody,
+    validateActionId
 }

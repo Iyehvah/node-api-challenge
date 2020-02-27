@@ -67,6 +67,17 @@ router.put("/:id", validateProjectID(), (req, res, next) => {
     .catch(error => next(error))
 })
 
+//GETS actions based on user id
+router.get("/actions/:id", validateProjectID(), (req, res, next) => {
+    const id = req.params.id
+
+    projectDB.getProjectActions(id)
+    .then(actions => {
+        res.status(200).json(actions)
+    })
+    .catch(error => next(error))
+})
+
 
 
 module.exports = router

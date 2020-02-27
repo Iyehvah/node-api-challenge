@@ -3,7 +3,7 @@ const server = express()
 
 const welcome = require("./welcome/welcome")
 const projectsRouter = require("./projects/projects")
-// const actionRouter = require("./actions/actions")
+const actionsRouter = require("./actions/actions")
 const helmet = require("helmet")
 const logger = require("./middleware/logger")
 
@@ -12,7 +12,7 @@ server.use(logger("short"))
 server.use(express.json())
 server.use("/", welcome)
 server.use("/api/projects", projectsRouter)
-// server.use("/api/actions", actionRouter)
+server.use("/api/actions", actionsRouter)
 
 const port = process.env.PORT || 5000
 
